@@ -1,0 +1,27 @@
+{
+  "name": "shokan",
+  "version": "0.1.0",
+  "description": "This is a deployment package for the NORS framework\"",
+  "bin": {
+    "deployScriptName": "./bin/shokan.js"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "execa": "^5.1.1"  // For executing shell commands
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "shokan"
+  },
+  "keywords": [
+    "deployment",
+    "nors",
+    "ci/cd"
+  ],
+  "author": "Konstrukteur",
+  "license": "ISC"
+}

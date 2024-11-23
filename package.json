@@ -1,13 +1,19 @@
 {
   "name": "shokan",
   "version": "0.1.0",
-  "description": "This is a deployment package for the NORS framework\"",
+  "description": "This is a deployment package for the NORS framework",
   "bin": {
     "deployScriptName": "./bin/shokan.js"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
-    "execa": "^5.1.1"  // For executing shell commands
+    "execa": "^5.1.1",
+    "chalk": "^5.0.0",
+    "perf_hooks": "latest",
+    "ssh2": "^1.5.0",
+    "node-fetch": "^3.0.0",
+    "commander": "^10.0.0",
+    "readline": "latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

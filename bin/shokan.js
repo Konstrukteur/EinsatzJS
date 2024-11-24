@@ -4,11 +4,26 @@ import { Command } from "commander";
 import { promises as fs } from "fs";
 import path from "path";
 import readline from "readline";
-import Shokan from "../lib/Shokan.js"; // Assuming Shokan class is in lib/shokan.js
-import deployConfig from "../config/deploy.js"; // The deployConfig (adjust the path as needed)
+import Shokan from "../lib/Shokan.js";
+
+import { sectionLogger, actionLogger } from "../lib/utils/logger.js";
 
 // Helper function to create a new deployer instance
-const createDeployer = () => {
+const createDeployer = async () => {
+  const deployConfigPath = path.resolve(process.cwd(), "config", "deploy.js");
+
+  let deployConfig;
+  try {
+    // Dynamically import the deployConfig
+    deployConfig = (await import(`file://${deployConfigPath}`)).default;
+  } catch (error) {
+    actionLogger.error(
+      `Error loading deploy configuration from ${deployConfigPath}:`,
+      error.message
+    );
+    process.exit(1); // Exit if config can't be loaded
+  }
+
   return new Shokan({
     application: deployConfig.application,
     deployVia: deployConfig.deployVia,
@@ -30,52 +45,54 @@ const createDeployer = () => {
 
 // Actions
 const deploy = async () => {
-  const deployer = createDeployer();
+  const deployer = await createDeployer();
   await deployer.deploy();
 };
 
 const releases = async () => {
-  const deployer = createDeployer();
+  const deployer = await createDeployer();
   await deployer.getReleaseIds();
 };
 
 const rollback = async () => {
-  const deployer = createDeployer();
+  const deployer = await createDeployer();
   await deployer.rollback();
 };
 
 const switchVersion = async (releaseId) => {
-  const deployer = createDeployer();
+  const deployer = await createDeployer();
 
   if (!releaseId) {
-    console.info("No release ID provided, fetching releases...");
+    actionLogger.info("No release ID provided, fetching releases...");
     try {
       const releaseIds = await deployer.getReleaseIds();
       if (!releaseIds || releaseIds.length === 0) {
-        console.info("No releases found. Exiting...");
+        actionLogger.info("No releases found. Exiting...");
         return;
       }
-      console.info("Available releases:");
+      actionLogger.info("Available releases:");
       releaseIds.forEach((id, index) =>
-        console.info(`${index + 1}. Release ID: ${id}`)
+        actionLogger.info(`${index + 1}. Release ID: ${id}`)
       );
 
       releaseId = await promptUserSelection(releaseIds);
       if (!releaseId) {
-        console.error("No valid release selected. Exiting...");
+        actionLogger.error("No valid release selected. Exiting...");
         return;
       }
     } catch (error) {
-      console.error("Error fetching release IDs:", error);
+      actionLogger.error("Error fetching release IDs:", error);
       return;
     }
   }
 
-  console.info(`Switching to release ID: ${releaseId}`);
+  actionLogger.info(`Switching to release ID: ${releaseId}`);
   try {
     await deployer.switchRelease(releaseId);
   } catch (error) {
-    console.error(`Error switching to release ${releaseId}: ${error.message}`);
+    actionLogger.error(
+      `Error switching to release ${releaseId}: ${error.message}`
+    );
   }
 };
 
@@ -92,7 +109,7 @@ const promptUserSelection = (releaseIds) => {
         "Select a release by number or press 'c' to cancel: ",
         (answer) => {
           if (answer.trim().toLowerCase() === "c") {
-            console.info("Operation cancelled by the user.");
+            actionLogger.info("Operation cancelled by the user.");
             resolve(null); // Return null for cancellation
             rl.close();
             return;
@@ -103,7 +120,7 @@ const promptUserSelection = (releaseIds) => {
             resolve(releaseIds[selectedIndex]); // Resolve with the selected release
             rl.close();
           } else {
-            console.error(
+            actionLogger.error(
               "Invalid selection. Please choose a valid release number or press 'c' to cancel."
             );
             askQuestion(); // Recurse to ask again
@@ -118,7 +135,7 @@ const promptUserSelection = (releaseIds) => {
 
 // Setup command to install the necessary pieces for deployment
 const setup = async () => {
-  const deployConfigPath = path.resolve("config", "deploy.js");
+  const deployConfigPath = path.resolve("templates/config", "deploy.js");
   const templatePath = path.resolve(
     "node_modules",
     "shokan",
@@ -127,21 +144,24 @@ const setup = async () => {
   );
 
   try {
+    // Ensure the config directory exists
+    await fs.mkdir(path.resolve("config"), { recursive: true });
+
     // Check if the deploy.js file already exists
     try {
       await fs.access(deployConfigPath);
-      console.log(
+      actionLogger.log(
         "deploy.js already exists in config directory. Skipping setup."
       );
       return;
     } catch (error) {
       // File does not exist, proceed with copy
-      console.log("Setting up deployment configuration...");
+      actionLogger.log("Setting up deployment configuration...");
       await fs.copyFile(templatePath, deployConfigPath);
-      console.log("deploy.js template copied to config directory.");
+      actionLogger.log("deploy.js template copied to config directory.");
     }
   } catch (error) {
-    console.error("Error during setup:", error.message);
+    actionLogger.error("Error during setup:", error.message);
   }
 };
 

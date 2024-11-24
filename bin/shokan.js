@@ -4,8 +4,8 @@ import { Command } from "commander";
 import { promises as fs } from "fs";
 import path from "path";
 import readline from "readline";
-import Shokan from "../lib/shokan.js"; // Assuming Shokan class is in lib/shokan.js
-import deployConfig from "../config/deployConfig.js"; // The deployConfig (adjust the path as needed)
+import Shokan from "../lib/Shokan.js"; // Assuming Shokan class is in lib/shokan.js
+import deployConfig from "../config/deploy.js"; // The deployConfig (adjust the path as needed)
 
 // Helper function to create a new deployer instance
 const createDeployer = () => {

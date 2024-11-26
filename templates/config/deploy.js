@@ -5,20 +5,30 @@ const application = "application_name";
 const agent = process.env.SSH_AUTH_SOCK; // Use the SSH agent for forwarding if available
 
 const deployConfig = {
+  // Server details
   server: "IP",
   port: 22,
-
-  application: application,
-  repoUrl: "git@github.com:Username/repository.git",
   user: user,
+
+  // Application details
+  application: application,
+
+  // Repo details
+  repoUrl: "git@github.com:Username/repository.git",
   branch: "branch",
 
+  // Deployment details
   stage: "stage",
-  deployVia: "git", // git, rsync, copy, remoteCache
+  /*
+   * Available method: git,
+   * methods in development: rsync, copy, remoteCache
+   */
+  deployVia: "git",
   deployTo: `/home/${user}/apps/${application}`,
 
   nodeVersion: "22.11.0",
 
+  // SSH details
   sshOptions: {
     agentForward: true,
     agent: agent,

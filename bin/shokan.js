@@ -6,7 +6,7 @@ import path from "path";
 import readline from "readline";
 import Shokan from "../lib/Shokan.js";
 
-import { sectionLogger, actionLogger } from "../lib/utils/logger.js";
+import { actionLogger } from "../lib/utils/logger.js";
 
 // Helper function to create a new deployer instance
 const createDeployer = async () => {
@@ -133,7 +133,7 @@ const promptUserSelection = (releaseIds) => {
   });
 };
 
-// Setup command to install the necessary pieces for deployment
+// Setup command to copy the configuration file to the application config directory for deployment
 const setup = async () => {
   const deployConfigPath = path.resolve("templates/config", "deploy.js");
   const templatePath = path.resolve(

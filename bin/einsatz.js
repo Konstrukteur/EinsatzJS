@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
+// Global imports
 import { Command } from "commander";
 import { promises as fs } from "fs";
 import path from "path";
 import readline from "readline";
-import Einsatz from "../lib/Einsatz.js";
 
+// Local imports
+import Einsatz from "../lib/Einsatz.js";
 import { actionLogger } from "../lib/utils/logger.js";
 
 // Helper function to create a new deployer instance

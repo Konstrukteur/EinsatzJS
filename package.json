@@ -1,7 +1,7 @@
 {
   "name": "einsatz",
   "version": "0.1.0",
-  "description": "This is a deployment package for the SoraJS / TetsuJS / KraftwerkJS framework",
+  "description": "This is a deployment package for the KraftwerkJS framework",
   "bin": {
     "deployScriptName": "./bin/einsatz.js"
   },
@@ -25,7 +25,7 @@
   },
   "keywords": [
     "deployment",
-    "nors",
+    "KraftwerkJS",
     "ci/cd"
   ],
   "author": "Konstrukteur",

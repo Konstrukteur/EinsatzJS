@@ -1,9 +1,9 @@
 {
-  "name": "shokan",
+  "name": "einsatz",
   "version": "0.1.0",
   "description": "This is a deployment package for the SoraJS / TetsuJS / KraftwerkJS framework",
   "bin": {
-    "deployScriptName": "./bin/shokan.js"
+    "deployScriptName": "./bin/einsatz.js"
   },
   "dependencies": {
     "chalk": "^5.0.0",
@@ -21,7 +21,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "shokan"
+    "url": "einsatz"
   },
   "keywords": [
     "deployment",

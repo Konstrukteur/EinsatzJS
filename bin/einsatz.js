@@ -4,7 +4,7 @@ import { Command } from "commander";
 import { promises as fs } from "fs";
 import path from "path";
 import readline from "readline";
-import Shokan from "../lib/Shokan.js";
+import Einsatz from "../lib/Einsatz.js";
 
 import { actionLogger } from "../lib/utils/logger.js";
 
@@ -24,7 +24,7 @@ const createDeployer = async () => {
     process.exit(1); // Exit if config can't be loaded
   }
 
-  return new Shokan({
+  return new Einsatz({
     application: deployConfig.application,
     deployVia: deployConfig.deployVia,
     connectionConfig: {
@@ -138,7 +138,7 @@ const setup = async () => {
   const deployConfigPath = path.resolve("templates/config", "deploy.js");
   const templatePath = path.resolve(
     "node_modules",
-    "shokan",
+    "einsatz",
     "config",
     "deploy.js"
   );
@@ -167,7 +167,7 @@ const setup = async () => {
 
 // Command-line program setup
 const program = new Command();
-program.name("shokan").version("0.1.0").description("Shokan Deployment CLI");
+program.name("einsatz").version("0.1.0").description("Einsatz Deployment CLI");
 
 program.command("deploy").description("Deploy the application").action(deploy);
 program.command("releases").description("List all releases").action(releases);

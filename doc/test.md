@@ -1,5 +1,5 @@
 dev % npm link
 
 test % npm init
-test % npm link shokan
-test % npx shokan deploy
+test % npm link einsatz
+test % npx einsatz deploy

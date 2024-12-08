@@ -1,9 +1,8 @@
-name: Publish to npm
+name: Publish npm package on GitHub Release
 
 on:
-  push:
-    tags:
-      - "v*" # Trigger on version tag (e.g., v1.0.0)
+  release:
+    types: [published] # Trigger this workflow when a new release is published
 
 jobs:
   publish:
@@ -18,14 +17,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "22" # Use your desired Node.js version
+          node-version: "22" # Replace with the Node.js version you're using
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Publish to npm
+      # Publish the package to npm
       - name: Publish to npm
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}} # npm auth token from GitHub secrets
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # The npm token stored in GitHub Secrets

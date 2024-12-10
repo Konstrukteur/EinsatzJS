@@ -1,5 +1,5 @@
 {
-  "name": "einsatzjs",
+  "name": "einsatz",
   "version": "0.0.1",
   "description": "This is a deployment package for the KraftwerkJS framework",
   "bin": {

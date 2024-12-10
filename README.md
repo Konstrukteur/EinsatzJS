@@ -1,3 +1,3 @@
-# Shokan
+# Einsatz
 
-This is the Shokan deployment package for the NORS framework.
+This is the Einsatz deployment package for the KraftwerkJS framework.

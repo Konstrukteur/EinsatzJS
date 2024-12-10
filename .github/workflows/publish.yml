@@ -1,0 +1,30 @@
+name: Publish npm package on GitHub Release
+
+on:
+  release:
+    types: [published] # Trigger this workflow when a new release is published
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22" # Replace with the Node.js version you're using
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Publish the package to npm
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # The npm token stored in GitHub Secrets

@@ -1,9 +1,9 @@
 {
   "name": "einsatz",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "This is a deployment package for the KraftwerkJS framework",
   "bin": {
-    "einsatz": "./bin/einsatz.js"
+    "einsatz": "bin/einsatz.js"
   },
   "dependencies": {
     "chalk": "^5.0.0",

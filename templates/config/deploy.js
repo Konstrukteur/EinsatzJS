@@ -1,24 +1,24 @@
 // config/deploy.js
 
-const user = "user name";
-const application = "application_name";
+const user = "user name"; // your ssh username
+const application = "application_name"; // your application name
 const agent = process.env.SSH_AUTH_SOCK; // Use the SSH agent for forwarding if available
 
 const deployConfig = {
   // Server details
-  server: "IP",
-  port: 22,
+  server: "IP", // the IP address of the production server
+  port: 22, // the port of the production server
   user: user,
 
   // Application details
   application: application,
 
   // Repo details
-  repoUrl: "git@github.com:Username/repository.git",
-  branch: "branch",
+  repoUrl: "git@github.com:Username/repository.git", // the repository url
+  branch: "branch", // the branch name for deployment
 
   // Deployment details
-  stage: "stage",
+  stage: "stage", // the branch name for deployment
   /*
    * Available method: git,
    * methods in development: rsync, copy, remoteCache
@@ -33,7 +33,7 @@ const deployConfig = {
     agentForward: true,
     agent: agent,
     user: user,
-    keys: "/Users/User/.ssh/id_rsa",
+    keys: "/Users/User/.ssh/id_rsa", // your deployment ssh key
   },
 };
 

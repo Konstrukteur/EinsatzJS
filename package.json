@@ -1,5 +1,5 @@
 {
-  "name": "einsatz",
+  "name": "einsatzjs",
   "version": "0.0.1",
   "description": "This is a deployment package for the KraftwerkJS framework",
   "bin": {
@@ -21,7 +21,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "einsatz"
+    "url": "https://github.com/your-username/einsatzjs.git"
   },
   "keywords": [
     "deployment",

@@ -17,7 +17,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "22" # Replace with the Node.js version you're using
+          node-version: "22" # Node.js version
+          registry-url: "https://registry.npmjs.org/" # Ensure the correct npm registry
+
+      # Authenticate with npm
+      - name: Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       # Install dependencies
       - name: Install dependencies
@@ -27,4 +32,4 @@ jobs:
       - name: Publish to npm
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # The npm token stored in GitHub Secrets
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

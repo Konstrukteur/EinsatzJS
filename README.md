@@ -1,6 +1,6 @@
 # EinsatzJS
 
-This is the EinsatzJS deployment package for the KraftwerkJS framework. It provides after isntallation deploy, rollback, switch and indexing of releases on a remote server.
+This is the EinsatzJS deployment package for the KraftwerkJS framework. It provides after installation deploy, rollback, switch and indexing of releases on a remote server.
 
 ### 1. **Installation**
 
@@ -30,7 +30,7 @@ This is the EinsatzJS deployment package for the KraftwerkJS framework. It provi
 
 - After successfully installing EinsatzJS. The `deploy.js` config file has to be created and configured. EinsatzJS takes care of creating the file:
   ```zsh
-  $ einsatz setup
+  $ npx einsatz setup
   ```
 - Running this command creates a config directory in your project directory, if it does not exist, and copies the `deploy.js` file into it.
 
@@ -50,22 +50,22 @@ EinsatzJS provides the following deployment actions:
 
 - deployment:
   ```zsh
-  $ einsatz deploy
+  $ npx einsatz deploy
   ```
 - rollback:
   ```zsh
-  $ einsatz rollback
+  $ npx einsatz rollback
   ```
 - get release version:
   ```zsh
-  $ einsatz releases
+  $ npx einsatz releases
   ```
 - switch release version:
   ```zsh
-  $ einsatz switch
+  $ npx einsatz switch
   ```
   It is possible to switch to a specific release version by running:
   ```zsh
-  $ einsatz switch 12345678901234
+  $ npx einsatz switch 12345678901234
   ```
-  Without specifying the release version. EinsatzJS js will automatically fetch the information about the released versions and ask for the release version to switch to.
+  Without specifying the release version EinsatzJS js will automatically fetch the information about the released versions and ask for the release version to switch to.

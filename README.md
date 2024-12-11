@@ -68,4 +68,4 @@ EinsatzJS provides the following deployment actions:
   ```zsh
   $ npx einsatz switch 12345678901234
   ```
-  Without specifying the release version. EinsatzJS js will automatically fetch the information about the released versions and ask for the release version to switch to.
+  Without specifying the release version EinsatzJS js will automatically fetch the information about the released versions and ask for the release version to switch to.

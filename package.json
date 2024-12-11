@@ -21,7 +21,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/einsatzjs.git"
+    "url": "git@github.com:Konstrukteur/EinsatzJS.git"
   },
   "keywords": [
     "deployment",
